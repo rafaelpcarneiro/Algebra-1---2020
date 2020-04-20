@@ -1,0 +1,176 @@
+% vim: foldmethod=marker: foldmarker=\\beginVimFold,\\endVimFold: fdl=0
+\documentclass[11pt,twoside,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}    
+\usepackage[brazil]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumerate}
+
+\usepackage{bbm} %% \mathbbm{1} gives you the identity function symbol 1
+
+%%% allows you to insert many figures indexed by (a), (b), ... on a figure environment
+\usepackage{float} 
+\usepackage[caption = false]{subfig}
+
+\usepackage{tikz}
+\usetikzlibrary{snakes} %% produces curly arrows on tikz
+\usetikzlibrary{matrix} %% for commutative diagrams
+\usetikzlibrary{arrows}
+
+\usepackage{ifthen} %% gives if conditionals when using newcommand
+%% Garamond fonts 
+%% \usepackage{ebgaramond}
+%% \usepackage[ugm]{mathdesign}
+
+\title{Resolução - Lista 2}
+\author{Rafael Polli Carneiro}
+\date{1o quad - 2020} 
+
+%%%%%%%%%%%%%%%%%  Math operators %%%%%%%%%%%%%%%%%%%%%%%
+%%% \\beginVimFold
+\DeclareMathOperator {\card}{card}
+\DeclareMathOperator {\Id}{\mathbbm{1}}
+
+
+\newcommand {\ComplexoAbs}[1]{%
+    \ifthenelse{ \isempty{#1} }% 
+        { (\mathcal{K}, \mathcal{S}) }%
+        { (\mathcal{K}_{#1}, \mathcal{S}_{#1}) }%
+}
+
+
+\DeclareTextFontCommand{\emph}{\bfseries\em} %% redefining \emph{} with bold and italic font
+\DeclareMathOperator{\definedAs}{\vcentcolon = }
+
+\DeclareMathOperator{\RMod}{ R-\text{módulo}}
+\DeclareMathOperator {\Imagem}{ Im }
+%%% \\endVimFold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% Theorems %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% \\beginVimFold
+
+\theoremstyle{remark}
+\newtheorem{exemplo}{Exemplo}[section]
+
+\theoremstyle{definition}
+\newtheorem{observacao}{Observação}[section]
+\newtheorem{definicao}{Definição}[section]
+\newtheorem*{notacao}{Notação}
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposicao}{Proposição}[section]
+%%% \\endVimFold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setcounter{secnumdepth}{0} %%% this will print the section titles on tableofcontens without inserting numbers.
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercício 5}
+Seja $M$ um módulo $\RMod$ simples, i.e., $M \neq (0)$ e seus únicos submódulos são $(0)$ e $M$.
+Afirmamos que
+\begin{enumerate}[(i)]
+    \item Dado $f: M \to N$ um homomorfismo não nulo, então $f$ é um monomorfismo;
+    \item Caso, ainda, tivermos na afirmação acima que $N$ é um $\RMod$ simples, então
+          $f$ será um isomorfismo;
+    \item $\hom_R(M,M)$ é um anel de divisão.
+\end{enumerate}
+
+Para provarmos a afirmação (i), basta notarmos que $\ker(f)$ é um submódulo de $M$, que, por sua vez,
+por ser um módulo simples implica que
+    \[ \ker(f) = (0) \quad \text{ou} \quad \ker(f) = M.\]
+Como, por hipótese, $f$ é um homomorfismo não nulo, temos que $\ker(f) = (0)$. Consequentemente,
+$f$ é um monomorfismo.
+
+Para  o item (ii), decorre do contra-domínio ser um $\RMod$ simples e, da imagem $\Imagem(f)$ ser um submódulo
+do contra domínio, que
+    \[ \Imagem(f) = (0) \quad \text{ou} \quad \Imagem(f) = M.\]
+Novamente, como $f$ não é nula, concluímos que $\Im(f) = M$ e, portanto, com o item (i) obtemos que
+$f$ é um isomorfismo.
+
+Seja o conjunto
+    \[\hom_R(M,M) = \{f: M \to M;\; f \, \text{é um homomorfismo} \}. \]
+Agora, consideremos a seguinte estrutura algébrica,
+    \[ (\hom_R(M,M), +, \circ, \Id), \]
+onde, para todo $f,g,h \in \hom_R(M,M)$ e para todo ponto $x \in M$, defini-se
+\begin{align*}
+    (f + g) (x) = f(x) + g(x);\\
+    (f \circ g) (x) = f(g(x)).
+\end{align*}
+Obviamente,  $(\hom_R(M,M), +)$ é um grupo abeliano, pois $M$ é um grupo abeliano.
+Note, também, que
+    \[ (h \circ ( f + g) )(x) = h(f(x) + g(x)) = h(f(x)) + h(g(x)) = (h \circ f + h \circ g)(x), \]
+i.e., a composição é distributiva a esquerda com a soma. Com um mesmo argumento, provamos
+a distributividade a direita. Pela composição de funções ser associativa e, pela identidade ser um homomorfismo,
+temos garantidos que
+    \[ (\hom_R(M,M) \setminus \{0\}, \circ, \Id) \]
+é um monóide. (Aqui, denotamos $0$ como o homomorfismo nulo.) Finalmente, pelo item (ii), temos que
+todo elemento de $\hom_R(M,M) \setminus \{0\}$ é um isomorfismo. Consequentemente, dados $x, y \in M$
+e $\alpha \in R$, vale, para $f \in\hom_R(M,M) \setminus \{0\}$, que
+    \[f^{-1} (x + \alpha y) = f^{-1}( f(\widetilde{x}) + \alpha f(\widetilde{y}) ) \]
+com $ f( \widetilde{x} ) = x$ e $ f( \widetilde{y} ) = y$. Portanto,
+    \[f^{-1} (x + \alpha y) = f^{-1}( f(\widetilde{x} + \alpha \widetilde{y}) ) = (\widetilde{x} + \alpha \widetilde{y}. \]
+Ou seja,
+    \[f^{-1} (x + \alpha y) = f^{-1}( x )+ \alpha f^{-1}(y). \]
+Portanto,
+    \[ f \in \hom_R(M,M) \implies f^{-1} \in \hom_R(M,M) \]
+e, desta forma, 
+    \[ (\hom_R(M,M) \setminus \{0\}, \circ, \Id) \]
+é um grupo abeliano. Consequentemente, $\hom_R(M,M)$ é um anel de divisão.
+
+\section{Exercício 7}
+Seja a sequência exata
+\[
+    \begin{tikzpicture}
+        \matrix [matrix of math nodes, row sep=1cm, column sep=1cm]
+        {
+            |(M)| M & |(N)| N & |(R)| R & |(S)| S\\
+        };
+        \tikzstyle{every node} = [midway, above]
+
+        \draw[->] (M) -- (N) node {$f$};
+        \draw[->] (N) -- (R) node {$g$};
+        \draw[->] (R) -- (S) node {$h$};
+    \end{tikzpicture}
+\]
+Então, as seguintes afirmações são equivalentes:
+\begin{enumerate}[(i)]
+    \item $f$ é epimorfismo;
+    \item $\Imagem(g) = (0)$;
+    \item $h$ é monomorfismo.
+\end{enumerate}
+Provemos as equivalências.
+
+$(i) \implies (ii)$. Se $f$ form um epimorfismo, então vale $\Imagem{f} = N$. Da mesma forma, por estarmos
+trabalhando com uma sequência exata, temos que
+    \[\ker(g) = \Imagem(f) = N.\]
+Logo, temos que $\ker(g) = N \implies g(N) = \{0\}$. Em outras palavras, 
+    \[\Imagem(g) = (0). \]
+
+$(ii) \implies (iii).$ Esta implicação é resultado imediato de
+    \[ \Imagem(g) = (0) = \ker(h). \]
+A igualdade acima fornece que $h$ é um monomorfismo.
+
+$(iii) \implies (i)$. Por $h$ ser um monomorfismo e, por estarmos trabalhando numa sequência exata,
+vale
+    \[ \ker(h) = (0) = \Imagem(g) \implies \ker(g) = N = \Imagem(f).\]
+Portanto, $f$ é um epimorfismo.
+
+
+\end{document}
+
