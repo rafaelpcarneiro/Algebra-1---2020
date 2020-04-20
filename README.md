@@ -1,7 +1,7 @@
-# Algebra 1 - 2020 (pt)
+# Algebra 1 - 2020 
 
-Here I will maintain my solutions on some exercises of theory of modules.
-Also I'll be trying to keep here some notes on the subject. 
+Here I will store my solutions on some exercises of theory of modules.
+Also I'll be trying to write some notes on the subject. 
 
 
 The books used on my studies are:
