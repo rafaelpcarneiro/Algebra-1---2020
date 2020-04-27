@@ -97,10 +97,10 @@ por ser um módulo simples implica que
 Como, por hipótese, $f$ é um homomorfismo não nulo, temos que $\ker(f) = (0)$. Consequentemente,
 $f$ é um monomorfismo.
 
-Para  o item (ii), decorre do contra-domínio ser um $\RMod$ simples e, da imagem $\Imagem(f)$ ser um submódulo
+Para  o item (ii), decorre do contra-domínio ser um $\RMod$ simples, e da imagem $\Imagem(f)$ ser um submódulo
 do contra domínio, que
     \[ \Imagem(f) = (0) \quad \text{ou} \quad \Imagem(f) = M.\]
-Novamente, como $f$ não é nula, concluímos que $\Im(f) = M$ e, portanto, com o item (i) obtemos que
+Novamente, como $f$ é não  nula, concluímos que $\Imagem(f) = M$ e, portanto, com o item (i) obtemos que
 $f$ é um isomorfismo.
 
 Seja o conjunto
@@ -115,8 +115,8 @@ onde, para todo $f,g,h \in \hom_R(M,M)$ e para todo ponto $x \in M$, defini-se
 Obviamente,  $(\hom_R(M,M), +)$ é um grupo abeliano, pois $M$ é um grupo abeliano.
 Note, também, que
     \[ (h \circ ( f + g) )(x) = h(f(x) + g(x)) = h(f(x)) + h(g(x)) = (h \circ f + h \circ g)(x), \]
-i.e., a composição é distributiva a esquerda com a soma. Com um mesmo argumento, provamos
-a distributividade a direita. Pela composição de funções ser associativa e, pela identidade ser um homomorfismo,
+i.e., a composição é distributiva à esquerda com a soma. Com um mesmo argumento, provamos
+a distributividade à direita. Pela composição de funções ser associativa, e pela identidade ser um homomorfismo,
 temos garantidos que
     \[ (\hom_R(M,M) \setminus \{0\}, \circ, \Id) \]
 é um monóide. (Aqui, denotamos $0$ como o homomorfismo nulo.) Finalmente, pelo item (ii), temos que
@@ -124,14 +124,14 @@ todo elemento de $\hom_R(M,M) \setminus \{0\}$ é um isomorfismo. Consequentemen
 e $\alpha \in R$, vale, para $f \in\hom_R(M,M) \setminus \{0\}$, que
     \[f^{-1} (x + \alpha y) = f^{-1}( f(\widetilde{x}) + \alpha f(\widetilde{y}) ) \]
 com $ f( \widetilde{x} ) = x$ e $ f( \widetilde{y} ) = y$. Portanto,
-    \[f^{-1} (x + \alpha y) = f^{-1}( f(\widetilde{x} + \alpha \widetilde{y}) ) = (\widetilde{x} + \alpha \widetilde{y}. \]
+    \[f^{-1} (x + \alpha y) = f^{-1}( f(\widetilde{x} + \alpha \widetilde{y}) ) = \widetilde{x} + \alpha \widetilde{y}. \]
 Ou seja,
     \[f^{-1} (x + \alpha y) = f^{-1}( x )+ \alpha f^{-1}(y). \]
 Portanto,
     \[ f \in \hom_R(M,M) \implies f^{-1} \in \hom_R(M,M) \]
 e, desta forma, 
     \[ (\hom_R(M,M) \setminus \{0\}, \circ, \Id) \]
-é um grupo abeliano. Consequentemente, $\hom_R(M,M)$ é um anel de divisão.
+é um grupo. Consequentemente, $\hom_R(M,M)$ é um anel de divisão.
 
 \section{Exercício 7}
 Seja a sequência exata
@@ -166,7 +166,7 @@ $(ii) \implies (iii).$ Esta implicação é resultado imediato de
     \[ \Imagem(g) = (0) = \ker(h). \]
 A igualdade acima fornece que $h$ é um monomorfismo.
 
-$(iii) \implies (i)$. Por $h$ ser um monomorfismo e, por estarmos trabalhando numa sequência exata,
+$(iii) \implies (i)$. Por $h$ ser um monomorfismo, e por estarmos trabalhando numa sequência exata,
 vale
     \[ \ker(h) = (0) = \Imagem(g) \implies \ker(g) = N = \Imagem(f).\]
 Portanto, $f$ é um epimorfismo.
