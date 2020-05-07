@@ -1,0 +1,204 @@
+% vim: foldmethod=marker: foldmarker=\\beginVimFold,\\endVimFold: fdl=0
+\documentclass[11pt,twoside,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}    
+\usepackage[brazil,portuguese, english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumerate}
+
+\usepackage{bbm} %% \mathbbm{1} gives you the identity function symbol 1
+
+%%% allows you to insert many figures indexed by (a), (b), ... on a figure environment
+\usepackage{float} 
+\usepackage[caption = false]{subfig}
+
+\usepackage{tikz}
+\usetikzlibrary{snakes} %% produces curly arrows on tikz
+\usetikzlibrary{matrix} %% for commutative diagrams
+\usetikzlibrary{arrows}
+
+\usepackage{ifthen} %% gives if conditionals when using newcommand
+%% Garamond fonts 
+%% \usepackage{ebgaramond}
+%% \usepackage[ugm]{mathdesign}
+
+\title{Álgebra 1 - Prof Nazar\\ Lista 3, Resolução}
+\author{Rafael Polli Carneiro, RA: 23201910232}
+\date{1o quad 2020} 
+
+%%%%%%%%%%%%%%%%%  Math operators %%%%%%%%%%%%%%%%%%%%%%%
+%%% \\beginVimFold
+% \DeclareMathOperator {\*}{*}
+
+\DeclareTextFontCommand{\emph}{\bfseries\em} %% redefining \emph{} with bold and italic font
+\DeclareMathOperator{\definedAs}{\vcentcolon = }
+
+\DeclareMathOperator {\Imagem}{ Im }
+
+\DeclareMathOperator {\Id}{ \mathbbm{1} }
+
+%%% \\endVimFold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\setcounter{secnumdepth}{0} %%% this will print the section titles on tableofcontens without inserting numbers.
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercício 1}
+Provemos que todo $R$-módulo livre $L$ é, também, um módulo projetivo. 
+Em outras palavras, provemos que, dados os $R$-módulos $L, M, N$, um epimorfismo $f:M \to N$ e um 
+homomorfismo $g: L \to N$ então, se $L$ for um módulo livre, existirá um homomorfismo $g': L \to M$ tal
+que o diagrama abaixo comuta
+\[
+    \begin{tikzpicture}
+        \matrix[ matrix of math nodes, row sep = 3em, column sep = 3em]
+        {
+            & |(L)| L \\
+            |(M)| M & |(N)| N.\\
+        };
+        \tikzstyle{every node} = [midway]
+        \draw[thick, ->] (L) -- (N) node[right] {$g$};
+        \draw[thick, dashed, ->] (L) -- (M) node[left] {$\exists\, g'$};
+        \draw[thick, ->] (M) -- (M -| N.west) node[above] {$f$};
+    \end{tikzpicture}
+\]
+
+Inicialmente, notemos que por $L$ ser um módulo livre então existe uma base $B \subseteq L$ tal que para todo 
+$R$-módulo $Q$ e toda função $\phi: B \to Q$ existe um único homomorfismo $\phi'$ tal que o diagrama abaixo comuta,
+\[
+    \begin{tikzpicture}
+        \matrix[ matrix of math nodes, row sep = 3em, column sep = 3em]
+        {
+            |(B)| B & |(L)| L\\
+            & |(Q)| Q,\\
+        };
+        \tikzstyle{every node} = [midway]
+        \draw[thick, dashed, ->] (L) -- (Q) node[right] {$\exists \, \phi'$};
+        \draw[thick, ->] (B) -- (Q) node[left] {$\phi$};
+        \draw[thick, right hook ->] (B) -- (B -| L.west) node[above] {$i$};
+    \end{tikzpicture}
+\]
+onde $i$ representa  a inclusão.
+
+Consequentemente, por $f: M \to N$ ser um epimorfismo, podemos definir uma função
+\begin{align*}
+    \phi: B & \to M\\
+    x & \mapsto y, \; \text{ tal que } f(y) = g(x),
+\end{align*}
+que satisfaz $f (\phi(x)) = g(x)$.
+
+Agora, pela propriedade universal dos módulos livres, explicitada  no diagrama acima,
+temos garantido a existência de um homomorfismo $\phi': L \to M$ tal que
+    \[ \phi' \circ i = \phi. \] 
+Finalmente, aplicando o homomorfismo $\phi'$ para todo $x \in L$, o qual podemos escrever como a soma finita
+    \[ x = \sum_{a \in B} \lambda_a a,\]
+obtemos o desejado:
+    \[ \phi'(x) = \sum_{a \in B} \lambda_a \phi(a) \implies f \circ \phi' (x) = \sum_{a \in B} \lambda_a f( \phi(a) ) = \sum_{a \in B} \lambda_a g(a) = g(x). \]
+
+\section{Exercício 2}
+Este exercício sai como resultado trivial do Exercício 1 junto com a propriedade de sequências exatas que cindem. De fato,
+dado o epimorfismo $f: M \to L$ e a identidade $\Id_L: L \to L$, sabemos, por $L$ ser um módulo livre, que existe um homomorfismo 
+$g: L \to M$ tal que
+    \[ f \circ g = \Id_L. \]
+Finalmente, se considerarmos a sequência
+\[
+    \begin{tikzpicture}
+        \matrix[matrix of math nodes, column sep = 3em]
+        {
+            |(0)| (0) & |(K)| \ker(f) & |(M)| M & |(L)| L & |(00)| (0),\\
+        };
+        \tikzstyle{every node} = [midway]
+        \draw[thick, ->] (0) -- ( 0 -| K.west);
+        \draw[thick, right hook ->] (K) -- ( K -| M.west) node[above] {$i$};
+        \draw[thick, ->] (M) -- (M -| L.west) node[above] {$f$};
+        \draw[thick, ->] (L) -- (L -| 00.west);
+    \end{tikzpicture}   
+\]
+com $i$ a inclusão, e observarmos que a mesma satisfaz as propriedades
+\begin{enumerate}[(i)]
+    \item $i: \ker(f) \to M$ é um monomorfismo;
+    \item $f$ é um epimorfismo;
+    \item existe um homomorfismo $g: L \to M$ tal que $f \circ g = \Id_l$;
+\end{enumerate}
+ou seja, que ela é uma sequência exata e que cinde, concluímos que
+    \[ M \cong \ker(f) \oplus L. \]
+
+
+\section{Exercício 8}
+Seja $P$ um $R$-módulo projetivo finitamente gerado pelo subconjunto $X \subseteq P$, ou seja,
+    \[ (X) = P, \]
+com
+    \[ X = \{m_1, m_2, \ldots, m_n \} \]
+e $R$ um anel comutativo com unidade.
+Mostremos que  existem $f_1, f_2, \ldots, f_n \in \hom_R(P, R)$ tal que
+    \[ x = \sum_{i =1}^n f_i(x) m_i \]
+para todo $x \in P$ e, ainda mais,
+    \[ f \in \hom_R(P,R) \implies  f = \sum_{i =1}^n f(m_i) f_i. \]
+
+Para provarmos este fato, notemos que a partir do conjunto $X$ podemos induzir o seguinte  $R$-módulo livre
+    \[ R^{X} \definedAs \{ (\lambda_x)_{x \in X}; \; \lambda_x \in R, \; \forall x \in X\} \]
+com base 
+    \[ B = \{ e_x \in R^X; \; x \in X\} \]
+onde $e_x = (\delta_{i, x})_{i \in X}$, com $\delta_{i,x}$ o índice de Kronecker.
+
+
+Agora, note que este módulo livre pode ser escrito como a soma direta
+    \[ R^{X} = \bigoplus_{i=1}^n R e_{m_i} \]
+o qual, consequentemente, induz as projeções (ortogonais):
+\begin{align*}
+ \pi_i:  R^{X} &\to \prescript{}{R}R \\
+ \sum_{j=1}^n \lambda_j e_{m_j} &\mapsto \lambda_i,
+\end{align*}
+para todo $i = 1, 2, \ldots, n$.
+
+Finalmente, utilizaremos a hipótese de que $P$ é um módulo projetivo. Antes, observe que podemos definir a função
+    \[ \Phi: B \to P,\, e_x \mapsto x, \quad \forall x \in X \]
+e, como $R^X$ é um módulo livre, $\Phi$ pode ser estendida de forma única para um homomorfismo,
+o qual denotaremos por $\overline{\Phi}$. É imediato que $\overline{\Phi}$ é um epimorfismo pois
+    \[ \overline{\Phi}\left( \sum_{x \in X} \alpha_x e_x \right) = \sum_{x \in X} \alpha_x x \]
+e $X$ gera $P$. Agora, dada a identidade $\Id_P$ e por $P$ ser um módulo projetivo, existe 
+um homomorfismo $g: P \to R^X$ tal que o diagrama abaixo comuta
+\[
+    \begin{tikzpicture}
+        \matrix[ matrix of math nodes, row sep = 3em, column sep = 3em] 
+        {
+            & |(P)| P \\
+            |(RX)| R^X & |(PP)| P,\\
+        };
+        \tikzstyle{every node} = [midway]
+        \draw[thick, ->] (P) -- (PP) node[right] {$\Id_P$};
+        \draw[thick, ->, dashed] (P) -- (RX) node[above] {$g$};
+        \draw[thick, ->] (RX) -- (RX -| PP.west)  node[above] {$\overline{\Phi}$};
+    \end{tikzpicture}
+\]
+i.e.,
+    \[ \overline{\Phi} \circ g = \Id_P. \]
+Logo, para todo $x \in P$ temos que 
+    \[ g(x) = \sum_{i=1}^n \lambda_i e_{m_i} \]
+o qual, aplicando $\overline{\Phi}$ na igualdade acima e usando a comutatividade do diagrama, fornece
+    \[ x = \sum_{i=1}^n \lambda_i \overline{\Phi} (e_{m_i}) = \sum_{i=1}^n \pi_i( g(x) )  m_i.\]
+Portanto, definindo os homomorfismos 
+    \[ f_i \definedAs \pi_i \circ g: P \to \prescript{}{R}R, \; \text{para todo}\;  i = 1, 2, \ldots, n \]
+obtemos a primeira igualdade desejada
+    \[ x = \sum_{i=1}^n f_i(x)  m_i.\] 
+Agora, para obtermos a segunda igualdade, basta, para todo homomorfismo $f:P \to \prescript{}{R}R$, aplicarmos $f$ na
+igualdade acima, obtendo
+    \[ f(x) =  \sum_{i=1}^n f_i(x)  f(m_i) \]
+para todo $x \in P$, ou seja, podemos escrever $f$ como  combinação linear dos $f_1, f_2, \ldots, f_n$:
+    \[ f = \sum_{i=1}^n  f(m_i) f_i. \] 
+\end{document}
+
