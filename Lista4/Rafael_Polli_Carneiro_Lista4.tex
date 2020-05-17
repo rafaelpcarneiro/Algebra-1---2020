@@ -1,0 +1,126 @@
+% vim: foldmethod=marker: foldmarker=\\beginVimFold,\\endVimFold: fdl=0
+\documentclass[11pt,twoside,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}    
+\usepackage[brazil,portuguese, english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumerate}
+
+\usepackage{bbm} %% \mathbbm{1} gives you the identity function symbol 1
+
+%%% allows you to insert many figures indexed by (a), (b), ... on a figure environment
+\usepackage{float} 
+\usepackage[caption = false]{subfig}
+
+\usepackage{tikz}
+\usetikzlibrary{snakes} %% produces curly arrows on tikz
+\usetikzlibrary{matrix} %% for commutative diagrams
+\usetikzlibrary{arrows}
+
+\usepackage{ifthen} %% gives if conditionals when using newcommand
+%% Garamond fonts 
+%% \usepackage{ebgaramond}
+%% \usepackage[ugm]{mathdesign}
+
+\title{Resolução da Lista 4 - Álgebra I \\ Prof Nazar}
+\author{Rafael Polli Carneiro, R.A.: 23201910232}
+\date{$1^o$ quad $2020$} 
+
+%%%%%%%%%%%%%%%%%  Math operators %%%%%%%%%%%%%%%%%%%%%%%
+%%% \\beginVimFold
+% \DeclareMathOperator {\*}{*}
+
+\DeclareTextFontCommand{\emph}{\bfseries\em} %% redefining \emph{} with bold and italic font
+\DeclareMathOperator{\definedAs}{\vcentcolon = }
+
+\DeclareMathOperator {\Imagem}{ Im }
+
+\DeclareMathOperator {\Z}{\mathbb{Z}}
+\DeclareMathOperator {\N}{\mathbb{N}}
+\DeclareMathOperator {\Q}{\mathbb{Q}}
+
+%%% \\endVimFold
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setcounter{secnumdepth}{0} %%% this will print the section titles on tableofcontens without inserting numbers.
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercício 3}
+Seja o $\Z$-módulo $M = \Z_{(p)} / \Z$ com
+    \[ \Z_{(p)}  = \left\{ \frac{a}{p^m}; \; a \in \Z, m \in \N \right\}. \]
+Provemos que
+\begin{enumerate}[(a)]
+    \item $M$ não é noetheriano;
+    \item Todo submódulo próprio de $M$ é finito e, portanto, $M$ é artiniano.
+\end{enumerate}
+
+O item (a) é fácil de provar, basta tomarmos a sequência de submódulos
+    \[ N_i \definedAs \left\{ \frac{a}{p^i} + \Z; \; a \in \Z, m \in \N \right\}, \]
+para todo $i \in \N.$ Desta sequência, temos que para todo natural $i$ e para todo inteiro $a$, vale a inclusão
+    \[ \frac{a}{p^i} \in N_i \implies \frac{a}{p^i} = \frac{a p}{p^{i+1}} \in N_{i+1}, \]
+ou seja, a sequência de submódulos 
+\[ N_1\subseteq N_2\subseteq \ldots\subseteq N_i\subseteq N_{i+1}\subseteq \ldots\]
+é ascendente e não estacionária, pois, para todo natural $i$,
+vale
+    \[ \frac{1}{p^{i+1}} \in N_{i+1} \setminus N_i. \]
+Portanto, existe uma sequência ascendente e não estacionária de submódulos em $M$. Logo, $M$ não é noetheriano.
+
+Agora, provemos que $M$ é artiniano. Para isto, provemos o item (b), ou seja, que todos os submódulos de $M$ são finitos.
+Seja $N$ um submódulo de $M$. Considere o conjunto
+    \[ C \definedAs \left\{ \frac{a}{p^m} ; \; a \neq 0, p^m \, \text{são primos entre si}  \text{ e } \frac{a}{p^m} + \Z \in N \right\}. \]
+Então, se $C = \emptyset$, temos que
+    \[ N = 0 + Z\]
+que é finito.
+Caso contrário, fixe o elemento
+    \[ \frac{a}{p^m} \in C \neq \emptyset. \]
+Logo, pelo Teorema de Bezout, existem inteiros $r, s$ tal que
+    \[ r a + s p^m = 1.\]
+Por esta igualdade somos capazes de inferir que
+    \[ \frac{b}{p^i} + \Z \in N, \quad \forall b \in Z, i \in \N \text{ e } i \leq m. \]
+De fato, seja $\frac{b}{p^i} + \Z$ um elemento como descrito acima. Logo,
+    \[ \frac{b}{p^i} = \frac{b a r}{p^i} + b s p^{m-i} \]
+ou seja,
+    \[\frac{b}{p^i} + \Z =   \frac{b a r p^{m-i}}{p^m} + \Z = (brp^{m-i}) \left(\frac{a}{p^m} + \Z \right) \in N. \]
+Agora, por $\Q$ ser arquimediano, sabemos que para todo $b/p^{n}$, com $b$ um inteiro e $n$ um natural, existe um natural
+$n_0$ tal que
+    \[ \frac{b}{p^n} \leq n_0 \frac{a}{p^m} \implies \frac{b}{p^n} + \Z \in N. \]
+Sendo assim, concluímos que
+    \[ N = \left\{ \frac{b}{p^i} + \Z ; \quad \forall b \in \Z, i \in \N \text{ e } i \leq m \right\}. \]
+Além do mais, temos que todo $b \in \Z$ pode ser escrito como
+    \[ b = \alpha_i p^i + b_i, \]
+com $\alpha_i \in \Z$ e $b_i \in [1,2, \ldots, p^i -1] \cap \Z$. Portanto
+    \[ N =  \left\{ \frac{b}{p^i} + \Z ; \quad i \leq m \text{ e } b \in [0, 1, \ldots p^i -1] \right\}. \]
+Ou seja, $N$ é finito.
+
+Finalmente, como todo submódulo de $M$ é finito temos que que toda sequência descendente de submódulos deve ser estacionária.
+De fato, basta observar que a sequência dada pela cardinalidade dos submódulos será decrescente e limitada, portanto convergente.
+Desta forma, pela convergência concluímos que a sequência descendente de submódulos é estacionária. Portanto, $M$ é artiniano.
+
+\section{Exercício 6}
+Seja $\Q$ o anel dos racionais e $\prescript{}{\Q}\Q$ o $\Q$-módulo dos racionais. Note que todo submódulo $N$ de $\prescript{}{\Q}\Q$ é
+da forma
+    \[ N = (0) \quad \text{ou} \quad N = \prescript{}{\Q} \Q. \]
+Portanto, $\Q$  é uma anel artiniano, já que toda sequência descendente de submódulos é estacionária.
+
+Porém, o subanel $\Z \subseteq \Q$ não é um anel artiniano. Para isto, basta obeservar que a sequência
+    \[ 2\Z \supseteq 2^2 \Z \supseteq 2^3 \Z 2^4 \Z \supseteq \cdots \]
+é descendente e nunca estacionária, pois
+    \[ 2^i \notin 2^{i+1} \Z, \quad \forall i \in \N.\]
+Portanto, $\Z$ não será um anel artiniano.
+
+\end{document}
+
